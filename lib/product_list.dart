@@ -97,7 +97,35 @@ class _ProductlistState extends State<Productlist> {
           ),
           Expanded(
             child: LayoutBuilder(builder: (context, constraints) {
-              if (constraints.maxWidth > 1080) {
+              if (constraints.maxWidth > 1080 && constraints.maxWidth < 1600) {
+                return GridView.builder(
+                    itemCount: products.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, childAspectRatio: 1.5),
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ProductDetailPage(product: product);
+                              },
+                            ),
+                          );
+                        },
+                        child: ProductCard(
+                          title: product['title'] as String,
+                          price: product['price'] as double,
+                          imageURL: product['imageUrl'] as String,
+                          backgroundcolor: index.isEven
+                              ? const Color.fromRGBO(216, 240, 253, 1)
+                              : const Color.fromRGBO(245, 247, 249, 1),
+                        ),
+                      );
+                    });
+              } else if (constraints.maxWidth > 1600) {
                 return GridView.builder(
                     itemCount: products.length,
                     gridDelegate:
