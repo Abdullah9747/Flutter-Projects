@@ -34,6 +34,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             padding: const EdgeInsets.all(16.0),
             child: Image.asset(
               widget.product['imageUrl'],
+              height: 250,
             ),
           ),
           const Spacer(
